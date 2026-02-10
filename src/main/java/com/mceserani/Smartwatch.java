@@ -2,6 +2,7 @@ package com.mceserani;
 
 public class Smartwatch {
 
+    private static int SmartwatchProdotti = 0;
     private static int totalePassiTuttiUtenti = 0;
 
     private int id;
@@ -11,12 +12,14 @@ public class Smartwatch {
     private int frequenzaCardiaca;
 
     public Smartwatch(String modello, int obiettivoPassi){
+        this.id = ++SmartwatchProdotti;
         this.modello = modello;
         this.obiettivoPassi = obiettivoPassi;
         this.passiEffettuati = 0;
     }
 
     public Smartwatch(String modello){
+        this.id = ++SmartwatchProdotti;
         this.modello = modello;
         this.obiettivoPassi = 10000;
         this.passiEffettuati = 0;
@@ -29,12 +32,11 @@ public class Smartwatch {
     // Getters and Setters
 
     public int getId() {
-        return id;
+        return this.id;
     }
     
-    public void setId(int id) {
-        this.id = id;
-    }
+    // Il setter di Id non viene implementato
+    // perché si vuole che l'Id dello SW non sia modificabile
     
     public String getModello() {
         return modello;
@@ -71,7 +73,7 @@ public class Smartwatch {
             this.frequenzaCardiaca = frequenzaCardiaca;
     }
 
-    public static int stampaPassiTotali(){
+    public static int getPassiTotaliTuttiUtenti(){
         return totalePassiTuttiUtenti;
     }
 

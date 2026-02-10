@@ -1,5 +1,7 @@
 package com.mceserani;
 
+import java.util.Scanner;
+
 public class EsercizioTracker {
 	
 	private EsercizioTracker(){
@@ -13,21 +15,40 @@ public class EsercizioTracker {
 	 */
     public static void main(String[] args){
        
-		Smartwatch sportWatchX = new Smartwatch("SportWatch");
-	   	Smartwatch fitnessBandZ = new Smartwatch("FitnessBand");
+		Scanner sc = new Scanner(System.in);
 
-		sportWatchX.aggiungiPassi(3500);
-		fitnessBandZ.aggiungiPassi(7235);
+		Smartwatch sws[] = new Smartwatch[10];
+		int pos = 0;
 
-		System.out.println(Smartwatch.stampaPassiTotali());
+		int opzione;
 
-		if (sportWatchX.equals(fitnessBandZ)) {
-			System.out.println("Gli orologi sono uguali");
-		} else {
-			System.out.println("Gli orologi sono diversi");
+		do{
+			System.out.println("Benvenuto! Scegli un'opzione.");
+			System.out.println("1. Crea nuovo Smartwatch");
+			System.out.println("2. Visualizza dati di uno Smartwatch");
+			System.out.println("3. Visualizza dati di tutti gli Smartwatch");
+			System.out.println("4. Aggiungi passi a uno Smartwatch");
+			System.out.println("5. Aggiungi passi a tutti gli Smartwatch");
+			System.out.println("6. Imposta frequenza cardiaca");
+			System.out.println("7. Esci");
+			opzione = sc.nextInt();
+			sc.nextLine();
+			if (opzione < 1 || opzione > 7)
+				System.out.println("Opzione non valida!");
+		}while(opzione < 1 || opzione > 7);
+
+		switch(opzione){
+			case 1: ...
+					if (pos < 10) {
+						sws[pos] = new Smartwatch(...);
+						pos++
+					else {
+						...
+					}
+
 		}
 
-		System.out.println(Smartwatch.calcolaKm(fitnessBandZ.getPassiEffettuati()));
+		sc.close();
 
     }
 
