@@ -1,8 +1,13 @@
 package com.mceserani;
 
+import java.lang.IllegalArgumentException;
+
 public class Smartwatch {
 
-    private static int SmartwatchProdotti = 0;
+    private static final int MinBPM = 40;
+    private static final int MaxBPM = 220;
+
+    private static int smartwatchProdotti = 0;
     private static int totalePassiTuttiUtenti = 0;
 
     private int id;
@@ -12,14 +17,14 @@ public class Smartwatch {
     private int frequenzaCardiaca;
 
     public Smartwatch(String modello, int obiettivoPassi){
-        this.id = ++SmartwatchProdotti;
+        this.id = ++smartwatchProdotti;
         this.modello = modello;
         this.obiettivoPassi = obiettivoPassi;
         this.passiEffettuati = 0;
     }
 
     public Smartwatch(String modello){
-        this.id = ++SmartwatchProdotti;
+        this.id = ++smartwatchProdotti;
         this.modello = modello;
         this.obiettivoPassi = 10000;
         this.passiEffettuati = 0;
@@ -66,9 +71,9 @@ public class Smartwatch {
         return frequenzaCardiaca;
     }
     
-    public void setFrequenzaCardiaca(int frequenzaCardiaca) {
-        if (frequenzaCardiaca < 40 || frequenzaCardiaca > 220)
-            System.out.println("Valore di frequenza cardiaca non valido");
+    public void setFrequenzaCardiaca(int frequenzaCardiaca) throws IllegalArgumentException {
+        if (frequenzaCardiaca < MinBPM || frequenzaCardiaca > MaxBPM)
+            throw new IllegalArgumentException("Frequenza cardiaca non valida. Deve essere compresa tra " + MinBPM + " e " + MaxBPM);
         else
             this.frequenzaCardiaca = frequenzaCardiaca;
     }

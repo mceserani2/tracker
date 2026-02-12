@@ -106,7 +106,11 @@ public class EsercizioTracker {
 							int freq;
 							System.out.print("Inserisci frequenza cardiaca: ");
 							freq = EsercizioTracker.getPosInt(sc);
-							sws[i].setFrequenzaCardiaca(freq);
+							try {
+								sws[i].setFrequenzaCardiaca(freq);
+							} catch (IllegalArgumentException e) {
+								System.out.println(e.getMessage());
+							}
 						}
 						break;
 				case 7: break;
