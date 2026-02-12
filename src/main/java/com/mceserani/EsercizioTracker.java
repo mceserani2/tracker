@@ -1,5 +1,7 @@
 package com.mceserani;
 
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class EsercizioTracker {
@@ -22,7 +24,10 @@ public class EsercizioTracker {
 		Smartwatch sws[] = new Smartwatch[N];
 		int pos = 0;
 
-		int opzione;
+		int opzione = 0;
+		int obiettivo = 0, id = 0, passi = 0;
+
+		int i;
 
 		do{ // ciclo principale
 
@@ -35,8 +40,7 @@ public class EsercizioTracker {
 				System.out.println("5. Aggiungi passi a tutti gli Smartwatch");
 				System.out.println("6. Imposta frequenza cardiaca");
 				System.out.println("7. Esci");
-				opzione = sc.nextInt();
-				sc.nextLine();
+				opzione = EsercizioTracker.getPosInt(sc);
 				if (opzione < 1 || opzione > 7)
 					System.out.println("Opzione non valida!");
 			}while(opzione < 1 || opzione > 7);
@@ -46,8 +50,7 @@ public class EsercizioTracker {
 							System.out.print("Inserisci modello: ");
 							String modello = sc.nextLine();
 							System.out.print("Obiettivo passi: ");
-							int obiettivo = sc.nextInt();
-							sc.nextLine();
+							obiettivo = EsercizioTracker.getPosInt(sc);
 							sws[pos] = new Smartwatch(modello, obiettivo);
 							pos++;
 						}else {
@@ -55,9 +58,7 @@ public class EsercizioTracker {
 						}
 						break;
 				case 2: System.out.print("Inserisci id: ");
-						int id = sc.nextInt();
-						sc.nextLine();
-						int i;
+						id = EsercizioTracker.getPosInt(sc);
 						for(i = 0; i < pos; i++){
 							if(sws[i].getId() == id){
 								System.out.println(sws[i].toString());
@@ -67,7 +68,49 @@ public class EsercizioTracker {
 						if(i == pos)
 							System.out.println("Smartwatch non presente.");
 						break;
-
+				case 3: for(i = 0; i < pos; i++){
+							System.out.println(sws[i].toString());
+						}
+						break;
+				case 4: System.out.print("Inserisci id: ");
+						id = EsercizioTracker.getPosInt(sc);
+						for(i = 0; i < pos; i++){
+							if(sws[i].getId() == id){
+								break;
+							}
+						}
+						if (i == pos)
+							System.out.println("Orologio non presente");
+						else {
+							System.out.print("Inserisci passi: ");
+							passi = EsercizioTracker.getPosInt(sc);
+							sws[i].aggiungiPassi(passi);
+						}
+						break;
+				case 5: System.out.print("Inserisci passi: ");
+						passi = EsercizioTracker.getPosInt(sc);
+						for(i = 0; i < pos; i++){
+							sws[i].aggiungiPassi(passi);
+						}
+						break;
+				case 6: System.out.print("Inserisci id: ");
+						id = EsercizioTracker.getPosInt(sc);
+						for(i = 0; i < pos; i++){
+							if(sws[i].getId() == id){
+								break;
+							}
+						}
+						if (i == pos)
+							System.out.println("Orologio non presente");
+						else {
+							int freq;
+							System.out.print("Inserisci frequenza cardiaca: ");
+							freq = EsercizioTracker.getPosInt(sc);
+							sws[i].setFrequenzaCardiaca(freq);
+						}
+						break;
+				case 7: break;
+				default: System.out.println("Opzione non valida");
 			}
 
 		}while(opzione != 7);
@@ -76,5 +119,24 @@ public class EsercizioTracker {
 		sc.close();
 
     }
+
+	private static int getPosInt(Scanner sc){
+		int num = 0;
+		do {
+			try {
+				num = sc.nextInt();
+				sc.nextLine();
+			} catch (InputMismatchException e) {
+				System.out.println("Errore! Inserire un numero intero!");
+				num = 0;
+			} catch (IllegalStateException | NoSuchElementException e) {
+				System.out.println("Ops... C'è stato un problema. Riprova.");
+				num = 0;
+			}
+			if (num<=0)
+				System.out.println("Il numero deve essere positivo");
+		}while(num <= 0);
+		return num;
+	} 
 
 }
