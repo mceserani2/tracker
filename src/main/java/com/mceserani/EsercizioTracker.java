@@ -129,9 +129,11 @@ public class EsercizioTracker {
 			} catch (InputMismatchException e) {
 				System.out.println("Errore! Inserire un numero intero!");
 				num = 0;
+				sc.nextLine();
 			} catch (IllegalStateException | NoSuchElementException e) {
 				System.out.println("Ops... C'è stato un problema. Riprova.");
 				num = 0;
+				sc.nextLine();
 			}
 			if (num<=0)
 				System.out.println("Il numero deve essere positivo");
